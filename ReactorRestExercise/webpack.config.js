@@ -39,12 +39,16 @@ module.exports = function (env) {
         );
     }
 
-    plugins.push(new HtmlWebpackPlugin({
-        template: 'index.html',
-        hash: true
-    }), new OpenBrowserPlugin({ 
+    // plugins.push(new HtmlWebpackPlugin({
+    //     template: 'index.html',
+    //     hash: true
+    // }), new OpenBrowserPlugin({ 
+    //     url: 'http://localhost:8082' 
+    // }));
+
+    plugins.push(new OpenBrowserPlugin({ 
         url: 'http://localhost:8082' 
-    }));
+    }));    
 
     return {
         devtool: isProd ? 'source-map' : 'eval',
