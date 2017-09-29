@@ -2,6 +2,13 @@
 
 Sample code and experiments of Sencha's ExtJS/ExtReact, with sample code from: https://github.com/sencha/extjs-reactor/tree/master/packages
 
+Comment 29/09/2017, 2:18:
+
+Followed the Nodejs + SQLServer tutorial: 
+https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-nodejs
+
+Expected to be integrated with ExtReact in the near future.
+
 Comment 29/09/2017, 1:33:
 
 New (FAKE) user login based on the REST example, since it's not really a formal user
