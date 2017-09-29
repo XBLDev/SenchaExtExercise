@@ -7,7 +7,7 @@ import Layout from './Layout';
 const store = createStore(
     reducer,
     {
-        showOptions: true,
+        showOptions: true,//default: true
         criteria: { }
     }, 
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

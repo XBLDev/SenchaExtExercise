@@ -73,17 +73,17 @@ const data = require('./data');
 // db2.close();  
 
 
-db.serialize(() => {
-  db.run('SELECT * FROM employeeInfo');
+// db.serialize(() => {
+//   db.run('SELECT * FROM employeeInfo');
 
-  // const stmt = db.prepare('INSERT INTO employees VALUES (?, ?, ?, ?, ?)')
+//   // const stmt = db.prepare('INSERT INTO employees VALUES (?, ?, ?, ?, ?)')
 
-  // for (let record of data) {
-  //   stmt.run(record.first_name, record.last_name, record.gender, record.age, record.email);  
-  // }
+//   // for (let record of data) {
+//   //   stmt.run(record.first_name, record.last_name, record.gender, record.age, record.email);  
+//   // }
 
-  // stmt.finalize()
-})
+//   // stmt.finalize()
+// })
 
 
 // db.serialize(() => {

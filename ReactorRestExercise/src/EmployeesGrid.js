@@ -32,6 +32,9 @@ class EmployeesGrid extends Component {
         }
     });
 
+
+    
+
     componentDidUpdate(prevProps) {
         const { criteria } = this.props;
 
@@ -39,6 +42,8 @@ class EmployeesGrid extends Component {
             const filters = [];
     
             for (let name in criteria) {
+                // console.log(name);//text
+                // console.log(criteria[name]);//xil
                 filters.push({
                     property: name,
                     value: criteria[name]                   

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { toggleOptions } from './actions';
 import EmployeesGrid from './EmployeesGrid';
 import SearchOptions from './SearchOptions';
+import Loginpage from './login';
 
 function Layout({ dispatch, showOptions }) {
     return (
@@ -13,7 +14,8 @@ function Layout({ dispatch, showOptions }) {
                 <Button align="left" iconCls="x-fa fa-bars" handler={() => dispatch(toggleOptions())}/>
             </TitleBar>
             <SearchOptions docked="left" hidden={!showOptions}/>
-            <EmployeesGrid shadow/>
+            <Loginpage shadow/>
+               {/* <EmployeesGrid shadow/>    */}
         </Container>
     )
 }

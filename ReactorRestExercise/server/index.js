@@ -23,76 +23,76 @@ const userdb = new sqlite3.Database(sourcePath, sqlite3.OPEN_READWRITE, function
   }
 });
 
-function hashPassword(password, salt) {
-  var hash = crypto.createHash('sha256');
-  hash.update(password);
-  hash.update(salt);
-  return hash.digest('hex');
-}
+// function hashPassword(password, salt) {
+//   var hash = crypto.createHash('sha256');
+//   hash.update(password);
+//   hash.update(salt);
+//   return hash.digest('hex');
+// }
 
-passport.use(new Strategy(function(username, password, done) {
-  console.log('Local strategy function is called'); 
-//   userdb.get('SELECT salt FROM users WHERE username = ?', username, function(err, row) {
-  userdb.get('SELECT username, password FROM userinfos WHERE username = ? AND password = ?', username, password, function(err, row) {
+// passport.use(new Strategy(function(username, password, done) {
+//   console.log('Local strategy function is called'); 
+// //   userdb.get('SELECT salt FROM users WHERE username = ?', username, function(err, row) {
+//   userdb.get('SELECT username, password FROM userinfos WHERE username = ? AND password = ?', username, password, function(err, row) {
       
-    if (!row) 
-    {
-        console.log('NOT FOUND USER IN userinfos');
-        return done(null, false);
-    }
-    else{
+//     if (!row) 
+//     {
+//         console.log('NOT FOUND USER IN userinfos');
+//         return done(null, false);
+//     }
+//     else{
 
-        console.log('FOUND USER IN userinfos!');
+//         console.log('FOUND USER IN userinfos!');
     
-        userdb.get('SELECT username, id FROM userinfos WHERE username = ? AND password = ?', username, password, function(err, row) {
-        if (!row){ 
-            console.log('CANNOT FIND USER ID IN userinfos WITH GIVEN USERNAME AND PASSWORD!');
+//         userdb.get('SELECT username, id FROM userinfos WHERE username = ? AND password = ?', username, password, function(err, row) {
+//         if (!row){ 
+//             console.log('CANNOT FIND USER ID IN userinfos WITH GIVEN USERNAME AND PASSWORD!');
             
-            return done(null, false);}
-        else{
-            console.log('FOUND USER ID IN userinfos WITH GIVEN USERNAME AND PASSWORD!');
-            console.log(row.id);    
-            console.log(row.username);
-            console.log(row.password);
-            console.log(row.salt);            
-            return done(null, row);
-        }
-        });
+//             return done(null, false);}
+//         else{
+//             console.log('FOUND USER ID IN userinfos WITH GIVEN USERNAME AND PASSWORD!');
+//             console.log(row.id);    
+//             console.log(row.username);
+//             console.log(row.password);
+//             console.log(row.salt);            
+//             return done(null, row);
+//         }
+//         });
 
-    }
-    // console.log(row.id);    
-    // console.log(row.username);
-    // console.log(row.password);
-    // console.log(row.salt);
+//     }
+//     // console.log(row.id);    
+//     // console.log(row.username);
+//     // console.log(row.password);
+//     // console.log(row.salt);
 
-    // return done(null, row);
-    // var hash = hashPassword(password, row.salt);
-    // userdb.get('SELECT username, id FROM users WHERE username = ? AND password = ?', username, hash, function(err, row) {
-    //   if (!row) return done(null, false);
-    // //   return done(null, row);
-    //   return done(null, username);
+//     // return done(null, row);
+//     // var hash = hashPassword(password, row.salt);
+//     // userdb.get('SELECT username, id FROM users WHERE username = ? AND password = ?', username, hash, function(err, row) {
+//     //   if (!row) return done(null, false);
+//     // //   return done(null, row);
+//     //   return done(null, username);
       
-    // });
-  });
-}));
+//     // });
+//   });
+// }));
 
-passport.serializeUser(function(user, done) {
-//   return done(null, user.id);
-    console.log('SERIALIZEUSER CALLED!');
-    done(null, user.id);
+// passport.serializeUser(function(user, done) {
+// //   return done(null, user.id);
+//     console.log('SERIALIZEUSER CALLED!');
+//     done(null, user.id);
 
-});
+// });
 
-passport.deserializeUser(function(id, done) {
-  console.log('DESERIALIZE USER CALLED!');
+// passport.deserializeUser(function(id, done) {
+//   console.log('DESERIALIZE USER CALLED!');
 
-  userdb.get('SELECT id, username FROM userinfos WHERE id = ?', id, function(err, row) {
-    if (!row) return done(null, false);
-    // return done(null, row);
-    done(null, row);
+//   userdb.get('SELECT id, username FROM userinfos WHERE id = ?', id, function(err, row) {
+//     if (!row) return done(null, false);
+//     // return done(null, row);
+//     done(null, row);
     
-  });
-});
+//   });
+// });
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -103,60 +103,62 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 // Configure view engine to render EJS templates.
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+// app.set('views', __dirname + '/views');
+// app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
-app.use(require('morgan')('combined'));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+// app.use(require('morgan')('combined'));
+// app.use(require('cookie-parser')());
+// app.use(require('body-parser').urlencoded({ extended: true }));
+// app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
 
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Define routes.
-app.get('/',
-  function(req, res) {
-    // if(!req.user.username)
-    // {
-    //    console.log(req.user.username);
-    // }
+// app.get('/',
+//   function(req, res) {
+//     // if(!req.user.username)
+//     // {
+//     //    console.log(req.user.username);
+//     // }
 
-    res.render('home', { user: req.user });
-    // res.render('home');
+//     res.render('home', { user: req.user });
+//     // res.render('home');
     
-  });
+//   });
 
-app.get('/login',
-  function(req, res){
-    res.render('login');
-  });
+// app.get('/login',
+//   function(req, res){
+//     res.render('login');
+//   });
 
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    // console.log('SUPPOSED TO BE THE EMPLOYER INFO PAGE');
-    // res.redirect('/employees');
-    res.redirect('/');
+// app.post('/login', 
+//   passport.authenticate('local', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // console.log('SUPPOSED TO BE THE EMPLOYER INFO PAGE');
+//     // res.redirect('/employees');
+//     res.redirect('/');
     
-  });
+//   });
 
-app.get('/logout',
-  function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
+// app.get('/logout',
+//   function(req, res){
+//     req.logout();
+//     res.redirect('/');
+//   });
 
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
+// app.get('/profile',
+//   require('connect-ensure-login').ensureLoggedIn(),
+//   function(req, res){
+//     res.render('profile', { user: req.user });
+//   });
+
+
 
 
 app.get('/employees', (req, res) => {
@@ -165,10 +167,13 @@ app.get('/employees', (req, res) => {
         const criteria = [], params = [];
         
         if (filter) {
+            console.log('employees: found following filter:');
             const filters = {};
 
             for (let { property, value } of JSON.parse(filter)) {
                 filters[property] = value;
+                console.log(property);
+                console.log(value);
             }
 
             if (filters.firstName) {
@@ -202,6 +207,10 @@ app.get('/employees', (req, res) => {
                 criteria.push(`(${nameCriteria.join(' and ')})`);
             }
         }
+        else{
+            console.log('employees: found no filter');
+
+        }
 
         where = criteria.length ? `WHERE ${criteria.join(' and ')}` : '';
 
@@ -234,5 +243,91 @@ app.get('/employees', (req, res) => {
         })
     })
 });
+
+app.get('/login', (req, res) => {
+    console.log('FRONT END CALLED LOGIN!');
+
+    userdb.serialize(() => {
+        // const { page, start, limit, filter, sort } = req.query;
+        const { page, start, limit, filter, sort } = req.query;
+        // console.log('page:', page);
+        // console.log('start:', start);
+        // console.log('limit:', limit);
+        // console.log('filter:', filter);
+        // console.log('sort:', sort);
+
+        const criteria = [], params = [];
+        
+        if (filter) {
+            // console.log('login: found the following filters:');
+
+            const filters = {};
+
+            for (let { property, value } of JSON.parse(filter)) {
+                filters[property] = value;
+                // console.log(property);
+                // console.log(value);
+            }
+            
+            if (filters.userName) {
+                // console.log(filters.userName);
+                criteria.push('username like ?');
+                params.push(`%${filters.userName}%`);
+            }            
+
+            if (filters.password) {
+                // console.log(filters.password);
+                criteria.push('password like ?');
+                params.push(`%${filters.password}%`);
+            }                        
+
+
+        }
+        else
+        {
+            console.log('login: no filters found!');
+        }
+
+        where = criteria.length ? `WHERE ${criteria.join(' and ')}` : '';
+        console.log('where clause: ', where);
+        const sql = `SELECT rowid AS id, * FROM userinfos ${where}`;
+        console.log(sql, params);
+
+        userdb.all(sql, params, (err, rows) => {
+            if (err) {
+                console.log('first userdb query failed');
+                res.send({ error: err.message })
+            }
+            else{
+                console.log('first userdb query succeeded');
+                userdb.get(`select count(*) as totalRecords from userinfos ${where}`, params, (err, result) => {
+                    
+                    if (err) {
+                        console.log('second userdb query failed');
+                        
+                        res.send({ error: err.message })
+                    } else {
+                        console.log('second userdb query succeeded');
+
+                        res.send({
+                            
+                            total: result.totalRecords,
+                            users: rows
+                        })
+                        // res.render('mainpage');
+
+                    }
+                });                
+            } 
+        
+        
+        
+        })
+
+    })
+
+
+});
+
 
 app.listen(port, () => console.log(`Server running on port ${port}.`));

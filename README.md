@@ -2,12 +2,25 @@
 
 Sample code and experiments of Sencha's ExtJS/ExtReact, with sample code from: https://github.com/sencha/extjs-reactor/tree/master/packages
 
+Comment 29/09/2017, 1:33:
+
+New (FAKE) user login based on the REST example, since it's not really a formal user
+authentication and it cannot remember user login session(it goes back to the login page
+when the page is freshed, which is not supposed to happen), it's more of a REST api exercise.
+
+For now the first page upon opening the page is a log in form with default username and password, 
+and clicking on log in will result in the sqlite3 DB finding the matching row and return 
+the result, and if the result is not null then the list of employees appear.
+
+Asked a question about user Auth in ExtReact: 
+https://www.sencha.com/forum/showthread.php?442118-Is-there-any-example-about-ExtReact-user-log-in-out-system
+
 Comment 26/09/2017, 7:22:
 
 Made a minimal user login/out with the ExtJS Rest example and sqlite3, most of the
 ideas come from: https://stackoverflow.com/questions/23481817/node-js-passport-autentification-with-sqlite
 
-Since React comes with the userAuth classes that can store session automatically and 
+Since React comes with the userAuth packages that can store session automatically and 
 handle other userAuth, this is just an alternative that might come in handy if needed.
 
 Tried redirecting the page to the employee info page that comes with the example, but 
